@@ -1,0 +1,36 @@
+---
+title: "Top 10 Des Moines Restaurants"
+author: "Dan Allbaugh"
+date: "October 22, 2019"
+output: html_document
+---
+
+```{r, echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(leaflet))
+suppressPackageStartupMessages(library(tidyr))
+suppressPackageStartupMessages(library(dplyr))
+
+
+restLatLong <- data.frame(lat=c(41.615119, 41.528707, 41.5864483, 41.585819, 41.601511, 41.604885, 41.583847, 41.560966, 41.566190, 41.668590), 
+                            lng=c(-93.677717, -93.626157, -93.667187, -93.630169, -93.792243, -93.733173, -93.628207, -93.881349, -93.798258, -93.697118))
+
+restSites <- c(
+    "<a href = 'https://flyingmango.com'> Flying Magno </a>",
+    "<a href = 'http://places.singleplatform.com/fat-tuesday-new-orleans-style-cuisine-and-more/menu?ref=google'> Fat Tuesday </a>",
+    "<a href = 'http://hagarsmanhattandeli.com/'> Manhattan Deli </a>",
+    "<a href = 'http://southunionbreadcafe.com/'> South Union </a>",
+    "<a href = 'https://www.redrossapizza.com'> Red Rossa </a>",
+    "<a href = 'https://m.atasteofitalyia.com'> A Taste of Italy </a>",
+    "<a href = 'https://malodesmoines.com/'> Malo </a>",
+    "<a href = 'https://www.rubessteakhouse-waukee.com/'> Rubes </a>",
+    "<a href = 'https://smashpark.com/'> Smash Park </a>",
+    "<a href = 'https://www.cactusbobsbbqcorral.com/'> Cactus Bob's </a>"
+)
+
+restLatLong %>%
+    leaflet() %>%
+    addTiles() %>%
+    addMarkers(popup = restSites, clusterOptions = markerClusterOptions())
+
+```
+
